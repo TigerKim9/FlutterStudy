@@ -13,7 +13,7 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Color(0xFFF99231),//hex Code로 정확한 색상을 넣어보자
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,  //Column의 default는 맨 위 정렬이므로 센터 정렬 해줌.
+        mainAxisAlignment: MainAxisAlignment.spaceAround,  //Column의 default는 맨 위 정렬이므로 센터 정렬 해줌.
         children: [
           Image.asset(
               "asset/img/logo.png"
