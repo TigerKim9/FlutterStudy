@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatefulWidget{
+class HomeScreen extends StatefulWidget {
   final Color color;
 
-  const HomeScreen({
-    required this.color,
-    Key? key
-  }): super(key: key);
+  const HomeScreen({required this.color, Key? key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -14,33 +11,23 @@ class HomeScreen extends StatefulWidget{
   }
 }
 
-class _HomeScreenState extends State<HomeScreen>{
+class _HomeScreenState extends State<HomeScreen> {
+  int number = 0;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 50.0,
-      height: 50.0,
-      color: widget.color,
-    );
-  }
-
-
-}
-
-class _HomeScreen extends StatelessWidget {
-  final Color color;
-
-  const _HomeScreen({
-    required this.color,
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 50.0,
-      height: 50.0,
-      color: color,
+    return GestureDetector(
+      onTap: (){
+        setState(() {
+          number++;
+        });
+        print(number);
+      },
+      child: Container(
+        width: 50.0,
+        height: 50.0,
+        color: widget.color,
+        child: Center(child: Text(number.toString())),
+      ),
     );
   }
 }
