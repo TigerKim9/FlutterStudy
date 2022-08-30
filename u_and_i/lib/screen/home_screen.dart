@@ -25,14 +25,7 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-class _TopPart extends StatefulWidget {
-  const _TopPart({Key? key}) : super(key: key);
-
-  @override
-  State<_TopPart> createState() => _TopPartState();
-}
-
-class _TopPartState extends State<_TopPart> {
+class _TopPartState extends StatelessWidget {
   DateTime selectedDate = DateTime(
     DateTime.now().year,
     DateTime.now().month,
