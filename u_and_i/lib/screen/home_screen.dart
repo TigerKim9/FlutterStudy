@@ -2,6 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
+  DateTime selectedDate = DateTime(
+      DateTime.now().year,
+      DateTime.now().month,
+      DateTime.now().day
+  );
+
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
@@ -14,7 +20,7 @@ class HomeScreen extends StatelessWidget {
           width: MediaQuery.of(context).size.width,
           child: Column(
             children: [
-              _TopPart(),
+              _TopPart(selectedDate: selectedDate,),
               _BottomPart()
               
             ],
@@ -25,12 +31,9 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-class _TopPartState extends StatelessWidget {
-  DateTime selectedDate = DateTime(
-    DateTime.now().year,
-    DateTime.now().month,
-    DateTime.now().day
-  );
+class _TopPart extends StatelessWidget {
+  final VoidCallback
+ _TopPart({required this.selectedDate, key? key}): super(key: key);
   @override
   Widget build(BuildContext context) {
     return Expanded(
