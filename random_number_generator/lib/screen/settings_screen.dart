@@ -42,7 +42,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   });
                 }),
             ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).pop(maxNumber.toInt());//뒤로 가는데 pop(값과 함께) 돌아가기
+                },
                 style: ElevatedButton.styleFrom(primary: RED_COLOR),
                 child: Text("저장"))
           ],

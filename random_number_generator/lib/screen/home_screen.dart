@@ -13,6 +13,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  int maxNumber = 1000;
+
   List<int> RandomNumber =[
     123,
     456,
@@ -41,8 +43,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                     IconButton(
-                        onPressed: () {
-                          Navigator.of(context).push(
+                        onPressed: () async {
+                         final result = await Navigator.of(context).push<int>(
                             MaterialPageRoute(builder: (BuildContext context){
                               return SettingsScreen();
                             }
@@ -87,7 +89,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           final Set<int> newNumbers={};
 
                           while(newNumbers.length !=3){         //중복된 숫자를 피하고 싶을 때 Set 자료형과 while 문을 사용해주면 간단하게 처리 가능
-                            final number = rand.nextInt(1000);
+                            final number = rand.nextInt(maxNumber);
 
                             newNumbers.add(number);
 
