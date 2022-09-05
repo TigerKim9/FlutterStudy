@@ -1,55 +1,111 @@
 import 'package:flutter/material.dart';
+import 'package:random_number_generator/component/number_row.dart';
 import 'package:random_number_generator/constant/color.dart';
 
 class SettingsScreen extends StatefulWidget {
-  const SettingsScreen({Key? key}) : super(key: key);
+  final int maxNumber;
+
+  const SettingsScreen({required this.maxNumber, Key? key}) : super(key: key);
 
   @override
-  State<SettingsScreen> createState() => _SettingsScreenState();
+  _SettingsScreenState createState() => _SettingsScreenState();
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  double maxNumber = 10000;
+  double maxNumber = 1000;
+
+  @override
+  void initState() {
+    super.initState();
+
+    maxNumber = widget.maxNumber.toDouble();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: PRIMARY_COLOR,
       body: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Expanded(
-              child: Row(
-                children: maxNumber.toInt()
-                    .toString()
-                    .split('')
-                    .map((e) => Image.asset(
-                          'asset/img/$e.png',
-                          width: 50,
-                          height: 70,
-                        ))
-                    .toList(),
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: 16.0,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              _Body(maxNumber: maxNumber),
+              _Footer(
+                maxNumber: maxNumber,
+                onSliderChanged: onSliderChanged,
+                onButtonPressed: onButtonPressed,
               ),
-            ),
-            Slider(
-                value: maxNumber,
-                min: 10000,
-                max: 1000000,
-                onChanged: (double val) {
-                  setState((){//값이 변하지만 슬라이드의 수치를 그리지 않기 때문에 setState로 계속 슬라이드를 그려내야한다.
-                  maxNumber = val;
-
-                  });
-                }),
-            ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).pop(maxNumber.toInt());//뒤로 가는데 pop(값과 함께) 돌아가기
-                },
-                style: ElevatedButton.styleFrom(primary: RED_COLOR),
-                child: Text("저장"))
-          ],
+            ],
+          ),
         ),
       ),
+    );
+  }
+
+  void onSliderChanged(double val){
+    setState(() {
+      maxNumber = val;
+    });
+  }
+
+  void onButtonPressed() {
+    Navigator.of(context).pop(maxNumber.toInt());
+  }
+}
+
+class _Body extends StatelessWidget {
+  final double maxNumber;
+
+  const _Body({
+    required this.maxNumber,
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: NumberRow(
+        number: maxNumber.toInt(),
+      ),
+    );
+  }
+}
+
+class _Footer extends StatelessWidget {
+  final double maxNumber;
+  final ValueChanged<double>? onSliderChanged;
+  final VoidCallback onButtonPressed;
+
+  const _Footer({
+    required this.maxNumber,
+    required this.onSliderChanged,
+    required this.onButtonPressed,
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Slider(
+          value: maxNumber,
+          min: 1000,
+          max: 100000,
+          onChanged: onSliderChanged,
+        ),
+        ElevatedButton(
+          onPressed: onButtonPressed,
+          style: ElevatedButton.styleFrom(
+            primary: RED_COLOR,
+          ),
+          child: Text('저장!'),
+        ),
+      ],
     );
   }
 }
