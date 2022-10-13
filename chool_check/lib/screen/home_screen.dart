@@ -77,7 +77,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
                   final distance = Geolocator.distanceBetween(
                     start.latitude,
-                    start.longitude,
+                    lstart.longitude,
                     end.latitude,
                     end.longitude,
                   );
