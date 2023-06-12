@@ -2,8 +2,11 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables
 // ignore_for_file: prefer_const_constructors_in_immutables
 import 'dart:io';
+import 'package:codingchef/shoppingPage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/material.dart';
+
+import 'SearchPage.dart';
 
 void main() => runApp(MyApp());
 
@@ -15,7 +18,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "Charactor card",
-      home: Grade(),
+      initialRoute: '/',
+      routes: {
+        '/' : (context) => Grade(),
+        '/shopping' : (context) => ShoppingPage(),
+        '/search' : (context) => SearchPage(),
+      },
     );
   }
 }
@@ -36,12 +44,15 @@ class Grade extends StatelessWidget {
             IconButton(
               icon: Icon(Icons.shopping_cart),
               onPressed: () {
+                Navigator.pushNamed(context, '/shopping'
+                );
                 print("shopping cart clicked");
               },
             ),
             IconButton(
               icon: Icon(Icons.search),
               onPressed: () {
+                Navigator.pushNamed(context, '/search');
                 print("search clicked");
               },
             ),
@@ -228,6 +239,8 @@ class Grade extends StatelessWidget {
                 onTap: (){
                   flutterToast();
                 },
+                splashColor: Colors.transparent,    //클릭시 물결애니메이션 없애기 원리: 투명색으로 만듦.
+                highlightColor: Colors.transparent, //클릭시 물결애니메이션 없애기 원리: 투명색으로 만듦.
               )
             ],
           ),
@@ -243,6 +256,9 @@ void flutterToast(){
     toastLength: Toast.LENGTH_SHORT
   );
 }
+
+
+
 //
 // class Times extends StatefulWidget {
 //   const Times({Key? key}) : super(key: key);
